@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "ShowDetails";
+}
+
+<h1>ShowDetails</h1>
+
+@model Student
+<h2>
+    @Model.Name
+</h2>
+
+<h2>
+    @Model.Id
+</h2>
+
+<img src="/Images/@Model.ImageURL"/>
