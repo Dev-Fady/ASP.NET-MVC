@@ -1,0 +1,79 @@
+﻿@using Q3DotNetAssiut.ViewModel
+@model InstructorWithDeptsAndCourses
+
+<form asp-controller="Instructor" asp-action="SaveEdit" method="post">
+    <input type="hidden" name="Id" value="@Model.MyInstructor.Id" />
+
+    <!-- Name -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Name</label>
+        <input name="Name" class="form-control" value="@Model.MyInstructor.Name" />
+    </div>
+
+    <!-- Salary -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Salary</label>
+        <input name="Salary" class="form-control" type="number" value="@Model.MyInstructor.Salary" />
+    </div>
+
+    <!-- Address -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Address</label>
+        <input name="Address" class="form-control" value="@Model.MyInstructor.Address" />
+    </div>
+
+    <!-- Department -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Department</label>
+        <select name="dept_id" class="form-select">
+            @foreach (var deptItem in Model.Depts)
+            {
+                if (Model.MyInstructor.dept_id == deptItem.Id)
+                {
+                    <option value="@deptItem.Id" selected>@deptItem.Name</option>
+                }
+                else
+                {
+                    <option value="@deptItem.Id">@deptItem.Name</option>
+
+                }
+            }
+        </select>
+    </div>
+
+    <!-- Course -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Course</label>
+        <select name="crs_id" class="form-select">
+            @foreach (var crs in Model.Courses)
+            {
+                if (Model.MyInstructor.crs_id == crs.Id)
+                {
+                    <option value="@crs.Id" selected>@crs.Name</option>
+                }
+                else
+                {
+                    <option value="@crs.Id">@crs.Name</option>
+                }
+            }
+        </select>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Image</label>
+        <input name="ImageUrl" class="form-control" value="@Model.MyInstructor.ImageUrl" />
+        @if (!string.IsNullOrEmpty(Model.MyInstructor.ImageUrl))
+        {
+            <div class="mt-2">
+                <img src="@Url.Content("~/Images/" + Model.MyInstructor.ImageUrl)" 
+                     class="img-thumbnail" style="max-height:150px;" />
+            </div>
+        }
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-controller="Instructor" asp-action="Index" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </div>
+</form>

@@ -1,0 +1,21 @@
+﻿@using Q3DotNetAssiut.ViewModel
+
+@model EmpDeptColorTempMsgBrchViewModel
+
+@{
+    ViewData["Title"] = "DetailsVM";
+}
+
+<h1 style="color:@Model.Color"> DetailsVM </h1>
+
+@Model.EmpName;
+@Model.employee.Name;
+@Model.employee.Address;
+@Model.employee.JopTitle;
+
+<select>
+    @foreach(var item in Model.Branches)
+    {
+        <option>@item</option>
+    }
+</select>

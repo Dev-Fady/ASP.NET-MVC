@@ -1,0 +1,51 @@
+﻿@model List<Instructor>
+<h2>All Instructors</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var instructor in Model)
+        {
+            <tr>
+                <td>@instructor.Id</td>
+                <td>@instructor.Name</td>
+                <td>@instructor.Address</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(instructor.ImageUrl))
+                    {
+                        <img src="@Url.Content("~/Images/" + instructor.ImageUrl)"
+                             width="80" height="80"
+                             alt="@instructor.Name" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Instructor"
+                       asp-action="Edit"
+                       asp-route-id="@instructor.Id"
+                       class="btn btn-sm btn-primary">
+                        Edit
+                    </a>
+
+                    <a asp-controller="Instructor"
+                       asp-action="AllDetails"
+                       asp-route-id="@instructor.Id"
+                       class="btn btn-sm btn-success">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

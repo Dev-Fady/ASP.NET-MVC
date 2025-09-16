@@ -1,0 +1,20 @@
+﻿@model Employee
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>@Model.Name</h2>
+
+<h1>@ViewData["Msg"]</h1>
+<h1>@ViewData["Temp"]</h1>
+
+<h3>@(ViewBag.Temp - 10)</h3>
+<h3 style="color:@ViewBag.color">@ViewBag.color</h3>
+<select class="form form-control">
+    @foreach (var item in (List<string>)ViewData["bra"])
+    {
+        <option>@item</option>
+    }
+</select>

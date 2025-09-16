@@ -1,0 +1,49 @@
+﻿@model List<Department>
+@{
+    ViewData["Title"] = "EmpDept";
+}
+
+<h1>EmpDept</h1>
+
+<select id="DeptId" name="DeptId" class="form form-control" onchange="GetEmp()">
+    @foreach (var deptItem in Model)
+    {
+        <option value="@deptItem.Id">@deptItem.Name</option>
+    }
+</select>
+<br />
+<select id="Emps" name="Emps" class="form form-control">
+    <option value="">-- اختر موظف --</option>
+</select>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    function GetEmp() {
+        var deptId = $("#DeptId").val();
+        console.log("Selected DeptId:", deptId);
+
+        $.ajax({
+            url: "/Department/GetEmpsByDeptID",
+            type: "GET",
+            data: { deptID: deptId },
+            success: function (res) {
+                console.log("Employees:", res);
+
+                // نفرغ اللي موجود الأول
+                $("#Emps").empty();
+
+                // نضيف اختيار افتراضي
+                $("#Emps").append('<option value="">-- اختر موظف --</option>');
+
+                // نعمل loop على الـ result ونضيفهم
+                $.each(res, function (i, emp) {
+                    $("#Emps").append('<option value="' + emp.id + '">' + emp.name + '</option>');
+                });
+            },
+            error: function (err) {
+                console.error("Error:", err);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,63 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "إضافة كورس جديد";
+    SelectList deptOptions = new SelectList(ViewBag.DeptList, "Id", "Name");
+
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">➕ إضافة كورس جديد</h2>
+
+    <form method="post" asp-controller="Course" asp-action="SaveCourse" class="shadow p-4 rounded bg-light">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">اسم الكورس</label>
+            <input asp-for="Name" class="form-control" placeholder="اكتب اسم الكورس" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="degree" class="form-label">الدرجة</label>
+                <input asp-for="degree" type="number" class="form-control" />
+                <span asp-validation-for="degree" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="minDegree" class="form-label">الحد الأدنى</label>
+                <input asp-for="minDegree" type="number" class="form-control" />
+                <span asp-validation-for="minDegree" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="hours" class="form-label">عدد الساعات</label>
+            <input asp-for="hours" type="number" class="form-control" />
+            <span asp-validation-for="hours" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="dept_id" class="form-label">القسم</label>
+            <select asp-for="dept_id" class="form-select"
+                    asp-items="deptOptions">
+                <option value="0">-- اختر القسم --</option>
+            </select>
+            <span asp-validation-for="dept_id" class="text-danger"></span>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success px-4">💾 حفظ</button>
+            <a asp-action="Index" class="btn btn-secondary px-4">⬅ رجوع</a>
+        </div>
+    </form>
+</div>
+@*  @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}  *@
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script
+><script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,53 @@
+﻿@model List<Course>
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">📚 قائمة الكورسات</h2>
+    <a asp-controller="Course" asp-action="AddCourse">اضافة كورس</a>
+
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">@course.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            القسم: @course.Department?.Name
+                        </h6>
+
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">🎓 الدرجة: @course.degree</li>
+                            <li class="list-group-item">✅ الحد الأدنى: @course.minDegree</li>
+                            <li class="list-group-item">⏳ الساعات: @course.hours</li>
+                        </ul>
+
+                        <div>
+                            <strong>👨‍🏫 المدرسين:</strong>
+                            <ul>
+                                @if (course.Instructors.Any())
+                                {
+                                    foreach (var inst in course.Instructors)
+                                    {
+                                        <li>@inst.Name</li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li><em>لا يوجد مدرّسين</em></li>
+                                }
+                            </ul>
+                        </div>
+
+                        <div>
+                            <strong>📊 عدد النتائج:</strong> @course.CrsResults.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
